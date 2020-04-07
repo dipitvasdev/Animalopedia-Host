@@ -1,6 +1,5 @@
 numpy
 pandas
-scikit-learn
 keras
 Click==7.0
 Flask==1.1.1
