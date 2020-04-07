@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Animal</title>
+	<link rel = 'icon' href="favicon.png" type = 'image/x-icon'>
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<style>
+		html{
+			font-family: 'Sen', sans-serif;
+			display: block ;
+			width: 100% ;
+			background-color:  #ff8b94 ;
+			color:#051e3e;
+		}
+		#header { 
+			text-align: right ;
+			float:right;
+		}
+		#main-content{
+			text-align: center ;
+			margin-top: 13% ;
+		}
+		h1{
+			font-size: 36px;
+		}
+		#footer {
+			margin-top: 11% ;
+			text-align: center ;
+			border:1px solid grey;
+			background:#d1eff1;
+		}
+		input,button {
+			margin:5px ;
+			font-family: 'Sen', sans-serif;
+			font-size: 14px ;
+			padding:10px ; 
+			border:1px solid  #0392cf;
+			border-radius: 5px 5px ;
+		}
+		button{
+			font-size: 20px; 
+		}
+		input:hover,button:hover{
+			background: #2ab7ca ;
+		}
+		label{
+			font-weight: bold ;
+		}
+		#result{
+			text-transform:uppercase;
+			border:3px solid #2ab7ca ;
+			border-radius: 5px 3px ;
+		}
+		#beta {
+			float:left;
+		}
+	</style>
+</head>
+<body>
+	<div id="beta">
+		<img src="https://img.icons8.com/cute-clipart/64/000000/beta.png"/>
+		<p>BETA VERSION</p>
+	</div>
+	<div id="header">
+		<p>ANIMALOPEDIA</p>
+		<img src="https://img.icons8.com/cute-clipart/64/000000/year-of-tiger.png"/>
+	</div>
+	<br>
+	<div id="main-content">
+		<img src="https://img.icons8.com/cute-clipart/64/000000/visible.png" width="75px" height="75px"/>
+		<h1 id="animal-eye">ANIMAL EYE</h1>
+		<form method="POST" action="/" id="eye" enctype="multipart/form-data">
+			<label for="image">UPLOAD A IMAGE:</label>
+			<input type="file" name="image" accept="image/*">
+			<button form="eye" type="submit">SEE!</button>
+		</form>
+		{%if your_result %}
+		<h3> I SPY WITH MY LITTLE EYE :<span id="result">{{your_result}}</span></h3>
+		{% endif%}
+	</div>
+	<div id="footer">
+		<p id="end">©Copyright Safari Software</p> 
+	</div>
+</body>
+</html>
