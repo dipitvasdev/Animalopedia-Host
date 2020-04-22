@@ -2,7 +2,6 @@
 from tensorflow.keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
-from PIL import Image
 
 # In[18]:
 
