@@ -6,7 +6,7 @@ import numpy as np
 
 # In[18]:
 
-model=load_model('animaleye.h5')
+model=load_model('animalopediamodel.h5')
 model._make_predict_function()
 def preprocess(img):
     img=image.load_img(img,target_size=(224,224))
