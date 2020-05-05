@@ -1,27 +1,21 @@
 from flask import Flask,render_template,redirect,request
-
-from keras.models import load_model
-from keras.preprocessing import image
+import tensorflow.keras
+from PIL import Image, ImageOps
 import numpy as np
 
-# In[18]:
-
-model=load_model('animalopediamodel.h5')
-model._make_predict_function()
-def preprocess(img):
-    img=image.load_img(img,target_size=(224,224))
-    img=image.img_to_array(img)
-    img= np.expand_dims(img, axis=0)
-    return img
-
-def prediction(img):
-    img=preprocess(img)
-    value=model.predict(img)
-    prediction=np.argmax(value[0])
-    class2animal={0:"Reindeer",1:"Elephant",2:"Ant",3:"Crocodile",4:"Penguin",5:"Wolf",6:"Tiger",7:"Parrot"}
-    return class2animal[prediction]
-
-
+def predict2(path):
+	np.set_printoptions(suppress=True)
+	model = tensorflow.keras.models.load_model('keras_model.h5')
+	data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+	image = Image.open(path)
+	size = (224, 224)
+	image = ImageOps.fit(image, size, Image.ANTIALIAS)
+	image_array = np.asarray(image)
+	image.show()
+	normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
+	data[0] = normalized_image_array
+	prediction = model.predict(data)
+	return prediction
 app=Flask(__name__)
 @app.route('/')
 def hello():
@@ -32,7 +26,9 @@ def submit():
 		f=request.files['image'] 
 		path = "{}".format(f.filename)
 		f.save(path)
-		predict = prediction(path)
-		return render_template("index.html",your_result=predict)
+		animal=predict2(path)
+		animal2=np.argmax(animal)
+		class2animal={0:"Ant",1:"Crocodile",2:"Elephant",3:"Parrot",4:"Penguin",5:"Reindeer",6:"Tiger",7:"Wolf"}
+		return render_template("index.html",your_result=class2animal[animal2])
 if __name__=='__main__':
 	app.run(debug = True )
